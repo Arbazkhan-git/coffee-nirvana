@@ -27,7 +27,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCart((prev) => prev.filter((_, i) => i !== index));
 
   const bookViaWhatsApp = () => {
-    const phone = "918660816216";
+    const phone = "9482669139";
     if (cart.length === 0) return;
     const lines = cart
       .map((item) => `- ${item.name} (₹${item.price})`)

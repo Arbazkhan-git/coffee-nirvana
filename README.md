@@ -28,7 +28,7 @@ Photos live in `public/images/`. The gallery uses `gallery-01.jpg` through `gall
 
 ## Customize
 
-- **WhatsApp number:** `lib/cart-context.tsx` (currently `918660816216`)
+- **WhatsApp number:** `lib/cart-context.tsx` (currently `9482669139`)
 - **Google Maps embed:** `components/Amenities.tsx` — replace the iframe `src`
 - **Rooms & packages:** `lib/data.ts`
 - **Instagram handle:** `components/Footer.tsx`

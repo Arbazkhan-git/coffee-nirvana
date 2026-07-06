@@ -11,10 +11,10 @@ export default function Footer() {
         <address className="mt-8 space-y-2 font-body text-sm not-italic text-cream/75">
           <p>
             <a
-              href="tel:+918660816216"
+              href="tel:+919482669139"
               className="transition-colors hover:text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper"
             >
-              +91 86608 16216
+              94826 69139
             </a>
           </p>
           <p>

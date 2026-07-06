@@ -104,10 +104,10 @@ export default function Amenities() {
               directions when you book.
             </p>
             <a
-              href="tel:+918660816216"
+              href="tel:+919482669139"
               className="mt-6 inline-flex items-center gap-2 font-body text-sm font-medium text-copper transition-colors hover:text-copper-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper"
             >
-              +91 86608 16216
+              94826 69139
               <span aria-hidden="true">→</span>
             </a>
           </div>

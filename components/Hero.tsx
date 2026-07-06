@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import CoffeeBranchIcon from "./CoffeeBranchIcon";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const heroImages = [
   "/images/hero-01.jpg",
@@ -15,6 +15,8 @@ const heroImages = [
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -40,6 +42,32 @@ export default function Hero() {
     document.getElementById("rooms")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+    setPaused(true);
+  };
+
+  const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const endX = event.changedTouches[0]?.clientX ?? null;
+    if (touchStartX.current === null || endX === null) {
+      touchStartX.current = null;
+      setPaused(false);
+      return;
+    }
+
+    const delta = touchStartX.current - endX;
+    const threshold = 45;
+
+    if (delta > threshold) {
+      setActiveIndex((p) => (p + 1) % heroImages.length);
+    } else if (delta < -threshold) {
+      setActiveIndex((p) => (p - 1 + heroImages.length) % heroImages.length);
+    }
+
+    touchStartX.current = null;
+    setPaused(false);
+  };
+
   return (
     <header
       className="relative flex min-h-[100svh] items-end overflow-hidden"
@@ -47,6 +75,8 @@ export default function Hero() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
       <div className="absolute inset-0">
         {heroImages.map((img, i) => (

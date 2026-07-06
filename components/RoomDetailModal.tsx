@@ -29,12 +29,18 @@ export default function RoomDetailModal({
   const { addToCart } = useCart();
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-espresso/60 p-6">
-      <div className="relative max-w-3xl w-full bg-cream rounded-2xl shadow-2xl overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-espresso/60 p-6"
+      onClick={onClose}
+    >
+      <div
+        className="relative max-w-3xl w-full bg-cream rounded-2xl shadow-2xl overflow-hidden"
+        onClick={(event) => event.stopPropagation()}
+      >
         <button
           aria-label="Close"
           onClick={onClose}
-          className="absolute top-4 right-4 text-espresso text-2xl"
+          className="absolute top-4 right-4 z-20 rounded-full bg-cream/90 p-2 text-espresso shadow-lg transition hover:bg-cream"
         >
           ×
         </button>

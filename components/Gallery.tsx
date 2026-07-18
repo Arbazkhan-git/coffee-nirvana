@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { galleryImages } from "@/lib/data";
 import SectionHeader from "./SectionHeader";
 
 export default function Gallery() {
+  const [showExtras, setShowExtras] = useState(false);
   const featured = galleryImages[4];
   const highlights = galleryImages.slice(0, 4);
-  const extras = galleryImages.slice(4, 12);
+  const extras = galleryImages.slice(4);
 
   return (
     <section id="gallery" className="bg-sage/10 py-20 md:py-28">
@@ -23,7 +25,7 @@ export default function Gallery() {
 
       <div className="mx-auto mt-14 max-w-6xl px-6">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative overflow-hidden rounded-[2rem] shadow-premium-lg">
+          <div className="relative overflow-hidden rounded-[2rem] shadow-premium-lg aspect-video">
             <Image
               src={featured.src}
               alt={featured.alt}
@@ -40,7 +42,7 @@ export default function Gallery() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             {highlights.map((image) => (
-              <div key={image.src} className="relative overflow-hidden rounded-[1.5rem] shadow-card">
+              <div key={image.src} className="relative overflow-hidden rounded-[1.5rem] shadow-card aspect-video">
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -64,26 +66,27 @@ export default function Gallery() {
             </div>
             <button
               type="button"
-              onClick={() => document.getElementById("visit")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => setShowExtras(!showExtras)}
               className="btn-primary whitespace-nowrap"
             >
-              View Visit Details
+              {showExtras ? "Show Less" : "Show More"}
             </button>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {extras.map((image) => (
-              <div key={image.src} className="overflow-hidden rounded-[1.5rem] border border-forest/10 bg-cream shadow-card">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={540}
-                  height={360}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
+          {showExtras && (
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {extras.map((image) => (
+                <div key={image.src} className="relative overflow-hidden rounded-[1.5rem] border border-forest/10 bg-cream shadow-card aspect-video">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

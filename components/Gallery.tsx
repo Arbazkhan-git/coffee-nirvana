@@ -5,56 +5,85 @@ import { galleryImages } from "@/lib/data";
 import SectionHeader from "./SectionHeader";
 
 export default function Gallery() {
-  const featured = galleryImages[0];
-  const rest = galleryImages.slice(1);
+  const featured = galleryImages[4];
+  const highlights = galleryImages.slice(0, 4);
+  const extras = galleryImages.slice(4, 12);
 
   return (
-    <section id="gallery" className="bg-cream-dark py-20 md:py-28">
+    <section id="gallery" className="bg-sage/10 py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Gallery"
-          title="The Estate"
-          description="Twenty-two acres of shade-grown coffee, pepper vines, and the kind of mornings that stay with you."
+          title="Estate Moments"
+          description="Browse a premium selection of photos showing our homestay, coffee gardens and the natural beauty that surrounds Coffee Nirvana."
+          align="center"
+          dark
         />
       </div>
 
       <div className="mx-auto mt-14 max-w-6xl px-6">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-sm shadow-premium-lg md:aspect-[21/9]">
-          <Image
-            src={featured.src}
-            alt={featured.alt}
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 1152px"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-espresso/30 via-transparent to-transparent" />
-        </div>
-      </div>
-
-      <div className="relative mt-10 md:mt-14">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cream-dark to-transparent md:w-24" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cream-dark to-transparent md:w-24" />
-
-        <div className="gallery-scroll flex gap-4 overflow-x-auto px-6 pb-2 snap-x snap-mandatory md:gap-5 md:px-8">
-          {rest.map((image, i) => (
-            <div
-              key={image.src}
-              className="group relative h-[22rem] w-[17rem] flex-shrink-0 snap-center overflow-hidden rounded-sm shadow-card md:h-[26rem] md:w-[20rem]"
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                sizes="(max-width: 768px) 272px, 320px"
-              />
-              <div className="absolute inset-0 bg-espresso/0 transition-colors duration-500 group-hover:bg-espresso/10" />
-              <span className="caption-label absolute bottom-4 left-4 text-cream/0 transition-all duration-500 group-hover:text-cream/90">
-                {String(i + 2).padStart(2, "0")}
-              </span>
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="relative overflow-hidden rounded-[2rem] shadow-premium-lg">
+            <Image
+              src={featured.src}
+              alt={featured.alt}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 896px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-transparent" />
+            <div className="absolute bottom-6 left-6 rounded-full bg-forest/80 px-4 py-2 text-sm font-medium text-cream shadow-sm">
+              Coffee estate sunrise
             </div>
-          ))}
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {highlights.map((image) => (
+              <div key={image.src} className="relative overflow-hidden rounded-[1.5rem] shadow-card">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out hover:scale-105"
+                  sizes="(max-width: 768px) 45vw, 45vw"
+                />
+                <div className="absolute inset-0 bg-forest/0 transition duration-500 hover:bg-forest/10" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 overflow-hidden rounded-[2rem] border border-forest/10 bg-olive/10 px-4 py-6 shadow-[0_24px_56px_-32px_rgba(20,44,30,0.14)] sm:px-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="font-display text-2xl font-semibold text-forest">More photos to explore</p>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-forest/70">
+                Scroll through extra images of the homestay, gardens and coffee country for a richer sense of the stay.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => document.getElementById("visit")?.scrollIntoView({ behavior: "smooth" })}
+              className="btn-primary whitespace-nowrap"
+            >
+              View Visit Details
+            </button>
+          </div>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {extras.map((image) => (
+              <div key={image.src} className="overflow-hidden rounded-[1.5rem] border border-forest/10 bg-cream shadow-card">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={540}
+                  height={360}
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

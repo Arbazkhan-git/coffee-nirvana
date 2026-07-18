@@ -5,6 +5,18 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -14,8 +26,8 @@
   }
 
   ::selection {
-    background-color: rgba(168, 112, 63, 0.25);
-    color: #2e2118;
+    background-color: rgba(79, 127, 92, 0.25);
+    color: #203a28;
   }
 }
 
@@ -37,7 +49,7 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: #4a5a3a;
+    color: #527a4b;
   }
 
   .btn-primary {
@@ -45,7 +57,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 9999px;
-    background-color: #a8703f;
+    background-color: #3b5f48;
     padding: 0.875rem 2rem;
     font-family: var(--font-inter), system-ui, sans-serif;
     font-size: 0.875rem;
@@ -54,19 +66,19 @@
     color: #f4ede0;
     transition: all 0.3s ease;
     box-shadow:
-      0 4px 24px -4px rgba(46, 33, 24, 0.08),
-      0 12px 48px -12px rgba(46, 33, 24, 0.12);
+      0 6px 28px -8px rgba(20, 44, 30, 0.2),
+      0 18px 56px -24px rgba(20, 44, 30, 0.18);
   }
 
   .btn-primary:hover {
-    background-color: #c4894f;
+    background-color: #537a60;
     box-shadow:
-      0 8px 32px -8px rgba(46, 33, 24, 0.1),
-      0 24px 64px -16px rgba(46, 33, 24, 0.14);
+      0 10px 34px -10px rgba(20, 44, 30, 0.22),
+      0 26px 68px -28px rgba(20, 44, 30, 0.2);
   }
 
   .btn-primary:focus-visible {
-    outline: 2px solid #a8703f;
+    outline: 2px solid #537a60;
     outline-offset: 2px;
   }
 
@@ -76,25 +88,25 @@
     align-items: center;
     justify-content: center;
     border-radius: 9999px;
-    border: 1px solid rgba(168, 112, 63, 0.8);
+    border: 1px solid rgba(79, 127, 92, 0.8);
     background-color: transparent;
     padding: 0.75rem 1.5rem;
     font-family: var(--font-inter), system-ui, sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.025em;
-    color: #a8703f;
+    color: #3b5f48;
     transition: all 0.3s ease;
   }
 
   .btn-outline:hover {
-    border-color: #a8703f;
-    background-color: #a8703f;
+    border-color: #3b5f48;
+    background-color: #3b5f48;
     color: #f4ede0;
   }
 
   .btn-outline:focus-visible {
-    outline: 2px solid #a8703f;
+    outline: 2px solid #3b5f48;
     outline-offset: 2px;
   }
 
@@ -106,7 +118,7 @@
     background: linear-gradient(
       to right,
       transparent,
-      rgba(168, 112, 63, 0.3),
+      rgba(79, 127, 92, 0.35),
       transparent
     );
   }

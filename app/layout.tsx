@@ -2,6 +2,7 @@ import { Fraunces, Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { CartProvider } from "@/lib/cart-context";
 import Navbar from "@/components/Navbar";
+import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -31,10 +32,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="font-body bg-cream text-espresso antialiased">
+      <body className="font-body bg-cream text-forest antialiased">
         <CartProvider>
           <Navbar />
           {children}
+          <WhatsAppChatButton />
         </CartProvider>
       </body>
     </html>

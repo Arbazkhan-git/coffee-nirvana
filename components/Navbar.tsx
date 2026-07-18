@@ -10,6 +10,8 @@ const links = [
   { label: "Visit", href: "#visit" },
 ];
 
+const directionsUrl = "https://www.google.com/maps/dir/?api=1&destination=13.1147090,75.5940930";
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -71,6 +73,18 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <button
             type="button"
+            onClick={() => window.open(directionsUrl, "_blank", "noopener,noreferrer")}
+            className={`hidden rounded-full border px-5 py-2 font-body text-xs font-medium uppercase tracking-caption transition-all md:inline-flex ${
+              scrolled
+                ? "border-forest/60 text-forest hover:bg-forest/10 hover:text-forest"
+                : "border-cream/30 text-cream/90 hover:border-cream hover:bg-cream/10"
+            } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest`}
+          >
+            Directions
+          </button>
+
+          <button
+            type="button"
             onClick={() => scrollTo("#rooms")}
             className={`hidden rounded-full border px-5 py-2 font-body text-xs font-medium uppercase tracking-caption transition-all md:inline-flex ${
               scrolled
@@ -111,6 +125,15 @@ export default function Navbar() {
                   {link.label}
                 </button>
               ))}
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  window.open(directionsUrl, "_blank", "noopener,noreferrer");
+                }}
+                className="mt-4 rounded-full border border-forest/60 bg-transparent px-4 py-3 text-forest"
+              >
+                Directions
+              </button>
               <button
                 onClick={() => {
                   setOpen(false);

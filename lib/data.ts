@@ -5,8 +5,8 @@ export const rooms = [
     price: 3000,
     images: [
       "/images/room-1.jpg",
-      "/images/gallery-01.jpg",
       "/images/gallery-10.jpg",
+      "/images/exterior-01.jpg",
     ],
     description:
       "Wake to mist rolling over the plantation from a private verandah with estate views.",
@@ -27,7 +27,7 @@ export const rooms = [
     id: "r2",
     name: "Shade Tree Room",
     price: 2500,
-    images: ["/images/room-2.jpg", "/images/gallery-03.jpg"],
+    images: ["/images/room-2.jpg", "/images/gallery-03.jpg", "/images/gallery-04.jpg"],
     description:
       "A quiet room tucked under old shade trees, with birdsong at first light.",
     details: {

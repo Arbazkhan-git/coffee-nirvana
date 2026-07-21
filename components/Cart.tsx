@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCart } from "@/lib/cart-context";
 
 function CartIcon() {
@@ -81,15 +81,24 @@ export default function Cart() {
   const { cart, removeFromCart, bookViaWhatsApp } = useCart();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const previousCartLength = useRef(cart.length);
+  const [cartPulse, setCartPulse] = useState(false);
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   useEffect(() => {
     if (cart.length > 0) {
       setMounted(true);
+      if (cart.length > previousCartLength.current) {
+        setOpen(true);
+        setCartPulse(true);
+        window.setTimeout(() => setCartPulse(false), 900);
+      }
+      previousCartLength.current = cart.length;
     } else {
       setOpen(false);
       const timer = setTimeout(() => setMounted(false), 300);
+      previousCartLength.current = 0;
       return () => clearTimeout(timer);
     }
   }, [cart.length]);
@@ -161,7 +170,7 @@ export default function Cart() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="flex w-full items-center justify-between gap-4 bg-espresso px-6 py-4 font-body text-sm font-medium text-cream shadow-premium-lg transition-all hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper md:w-auto md:justify-center md:rounded-full md:px-6 md:py-3.5"
+          className={`flex w-full items-center justify-between gap-4 bg-espresso px-6 py-4 font-body text-sm font-medium text-cream shadow-premium-lg transition-all hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper md:w-auto md:justify-center md:rounded-full md:px-6 md:py-3.5 ${cartPulse ? "ring-2 ring-copper/70" : ""}`}
           aria-expanded={open}
           aria-label={`Cart with ${cart.length} items, total ₹${total.toLocaleString("en-IN")}`}
         >

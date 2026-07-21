@@ -5,6 +5,7 @@ import {
   useContext,
   useState,
   ReactNode,
+  useMemo,
 } from "react";
 
 type CartItem = { id: string; name: string; price: number };
@@ -21,7 +22,9 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (item: CartItem) => setCart((prev) => [...prev, item]);
+  const addToCart = (item: CartItem) => {
+    setCart((prev) => [...prev, item]);
+  };
 
   const removeFromCart = (index: number) =>
     setCart((prev) => prev.filter((_, i) => i !== index));
@@ -40,12 +43,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const value = useMemo(
+    () => ({ cart, addToCart, removeFromCart, bookViaWhatsApp }),
+    [cart]
+  );
+
   return (
-    <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, bookViaWhatsApp }}
-    >
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={value}>{children}</CartContext.Provider>
   );
 }
 

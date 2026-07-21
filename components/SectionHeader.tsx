@@ -1,6 +1,5 @@
 "use client";
 
-import { useInView } from "@/lib/useInView";
 import CoffeeBranchIcon from "./CoffeeBranchIcon";
 
 type SectionHeaderProps = {
@@ -18,17 +17,10 @@ export default function SectionHeader({
   align = "left",
   dark = false,
 }: SectionHeaderProps) {
-  const { ref, isInView } = useInView<HTMLDivElement>();
-
   return (
     <div
-      ref={ref}
-      className={`transition-all duration-700 motion-reduce:transition-none ${
+      className={`animate-fade-up transition-all duration-700 motion-reduce:transition-none ${
         align === "center" ? "text-center" : ""
-      } ${
-        isInView
-          ? "translate-y-0 opacity-100"
-          : "translate-y-8 opacity-0 motion-reduce:translate-y-0 motion-reduce:opacity-100"
       }`}
     >
       <span

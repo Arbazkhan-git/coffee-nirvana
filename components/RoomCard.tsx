@@ -27,6 +27,7 @@ export default function RoomCard({
   const { addToCart } = useCart();
   const [showModal, setShowModal] = useState(false);
   const [active, setActive] = useState(0);
+  const [added, setAdded] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   function onScroll() {
@@ -78,13 +79,22 @@ export default function RoomCard({
         <div className="mt-6 flex items-center gap-3">
           <button
             type="button"
-            onClick={() => addToCart({ id, name, price })}
+            onClick={(event) => {
+              event.stopPropagation();
+              addToCart({ id, name, price });
+              setAdded(true);
+              window.setTimeout(() => setAdded(false), 1200);
+            }}
             className="btn-outline"
           >
-            Add to Cart
+            {added ? "Added ✓" : "Add to Cart"}
           </button>
 
-          <button type="button" onClick={() => setShowModal(true)} className="btn-ghost">
+          <button
+            type="button"
+            onClick={() => setShowModal(true)}
+            className="inline-flex items-center justify-center rounded-full border border-espresso/15 bg-transparent px-4 py-2.5 font-body text-sm font-semibold text-espresso transition hover:border-espresso hover:bg-espresso/5"
+          >
             View Details
           </button>
         </div>
